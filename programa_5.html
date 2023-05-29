@@ -1,0 +1,60 @@
+<canvas width="600" height="400"> </canvas>
+
+<script>
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");    
+    pincel.fillStyle = "lightgrey";
+    pincel.fillRect(0,0,600,400);
+
+    var radio = 10;
+    var xaleatorio;
+    var yaleatorio;
+
+    function disenarCircunfeencia(x,y,radio,color){
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc (x,y,radio,0,2*Math.PI);
+        pincel.fill();
+    }
+    function limpiarPantalla(){
+        pincel.clearRect(0,0,600,400);
+    }
+    function actualizarpantalla(){
+        limpiarPantalla();
+        disenarCircunfeencia(x,20,10);
+        x++;
+    }
+    function disenarobjetivo(x,y){
+        disenarCircunfeencia(x,y,radio + 20,"red");
+        disenarCircunfeencia(x,y,radio + 10,"white");
+        disenarCircunfeencia(x,y,radio,"red");
+    }
+    function posicion(maximo){
+        return Math.floor(Math.random()*maximo);
+    }
+    function actualizarpantalla (){
+        limpiarPantalla();
+        xaleatorio = posicion(600);
+        yaleatorio = posicion(400);
+        disenarobjetivo (xaleatorio,yaleatorio);
+        x++
+    }
+    
+    setInterval(actualizarpantalla,10000);
+
+    function disparar (evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+        if( (x<xaleatorio + radio) &&
+            (y<yaleatorio + radio) &&
+            (x>xaleatorio - radio) &&
+            (y>yaleatorio - radio)){
+                alert("tiro certero")
+            }
+        
+    }
+    
+    pantalla.onclick = disparar;
+
+    //disenarobjetivo(xaleatorio,yaleatorio);
+</script> 

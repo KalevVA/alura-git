@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+
+<h1>media de edades</h1>
+
+<script>
+
+    function saltarLinea() {
+        document.write("<br>");    
+        document.write("<br>");    
+  
+    }  
+
+    function imprimir(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+
+    var mienbros = parseInt(prompt("ingrese un numerode miebros: "));
+    var contador = 1;
+    var total = 0;
+    var media = 0; 
+    while (contador <= mienbros){
+        edad = parseInt(prompt("ingrese la edade del familiar"));
+        total = total + edad;
+        contador++;
+        media = total / mienbros;
+    }
+    imprimir("el total:" + total)
+    imprimir ("la media de la familia es: " + media) 
+   
+
+</script>

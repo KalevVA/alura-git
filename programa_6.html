@@ -1,0 +1,102 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var puedoDibujar = false;
+
+    var xrojo = 0;
+    var xverde = 50;
+    var xazul = 100;
+    var ycuadros = 0;
+    var tamañocuadrados = 50;
+    var coloractual = "blue";
+    
+    function dibujarCirculo(x,y,coloractual) {
+
+        if(puedoDibujar) {
+            pincel.fillStyle = coloractual;
+            pincel.beginPath();
+            pincel.arc(x, y,5,0,2*3.14);
+            pincel.fill();
+        }
+    }
+
+    function dibujarcuadrado (x,y,tamanho,color){
+        pincel.fillStyle = color;
+        pincel.fillRect (x,y,tamanho,tamanho);
+        pincel.fill();
+    }
+
+    function dibujarpaletacolres(){
+        dibujarcuadrado(xrojo,ycuadros,tamañocuadrados,"red");
+        dibujarcuadrado(xverde,ycuadros,tamañocuadrados,"green");
+        dibujarcuadrado(xazul,ycuadros,tamañocuadrados,"blue");
+    }
+
+    function habilitarDibujar() {
+
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+
+        puedoDibujar = false;
+    }
+
+    function puedediseñararea(xcoordenada, ycoordenada){
+        if((xcoordenada >= 0 &&(xcoordenada<(3*tamañocuadrados+5))&&
+            ycoordenada>= 0 && ycoordenada<(tamañocuadrados+5))){
+                return false;
+            }else{
+                return true;
+            }
+    }
+    function capturarelmovimientodelmouse (evento){
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+        if(puedediseñararea(x.y)){
+            dibujarCirculo(x,y,coloractual);
+        }
+    }
+    function seleccionarColor(evento) {
+
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+
+        //Cada condición altera el color de la variable colorActual
+
+        //Comenzamos por la condición del eje Y que es común para todas
+        if (y > ycuadros && y < (ycuadros + tamañocuadrados)) {
+
+            if(x > xrojo && x < (xrojo + tamañocuadrados)) {
+
+                coloractual = "red";
+                console.log(coloractual);
+
+            } else if (x > xverde && x < (xverde + tamañocuadrados)) {
+
+                coloractual = "green";
+
+            } else if(x > xazul && x < (xazul + tamañocuadrados)) {
+
+                coloractual = "blue";
+            }            
+        }   
+    }
+
+    pantalla.onmousemove = capturarelmovimientodelmouse;
+
+    pantalla.onmousedown = habilitarDibujar;
+
+    pantalla.onmouseup = deshabilitarDibujar;
+
+    dibujarpaletacolres();
+
+    pantalla.onclick = seleccionarColor;
+
+</script>

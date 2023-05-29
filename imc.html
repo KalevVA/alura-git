@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Calculo de IMC</title>
+</head>
+<script >
+    //12/04/2023
+    // el IMC(indice de masa corporal) se calcula con la siguiente formula
+    //   peso / altura * altura 
+
+    /*1*/
+    var peso = 71;
+    var altura = 1.72;
+    var imc = peso / (altura * altura);
+    document.write("Si el peso es de: " + peso + "<br>" + "y la altura es de 1.71m" + "<br>");
+    document.write("el IMC de el sujeto es de: " + Math.round(imc) );
+    document.write("<hr>");
+    /*2*/
+    //con function
+    var imc = 0;
+    function calcImc(pes, alt){
+          imc = pes / (alt * alt);
+        document.write("IMC: " +  Math.round(imc) + "<br>");
+    }
+    document.write("función IMC" + "<br>");
+    calcImc(71, 1.72)
+     document.write("<hr>")
+
+     /*3*/
+     //ahora la función recibe el el nobre del usuario
+     var imc = 0;
+    function calc_imc_con_nombre(pes, alt, nombre){
+          imc = pes / (alt * alt);
+        document.write("EL imc de " + nombre + " es: " +  Math.round(imc) + "<br>");
+    }
+    document.write("función IMC con nombre" + "<br>");
+    calc_imc_con_nombre(71, 1.72, "Juan");
+    calc_imc_con_nombre(56, 1.6, "jaky");
+     document.write("<hr>");
+</script>
+<body> 
+</body>
+</html>
+
+
+
+
+
+
+
+<meta charset="UTF-8">
+<h1>EQUIPO DE FUTBOL</h1>
+<script>
+    function saltarLinea() {
+
+        document.write("<br>");
+    }
+
+    function mostrar(frase) {
+        document.write(frase);
+        saltarLinea();
+    }
+
+    var victorias = parseInt(prompt("informe la cantida de victorias"));
+    var empates = parseInt(prompt("informe la cantida de empates"));
+    puntosTotal = (victorias * 3) + empates ;
+    mostrar("El total de puntos es: " + puntosTotal);
+</script>
